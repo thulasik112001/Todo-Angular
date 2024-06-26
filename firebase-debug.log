@@ -1,0 +1,22 @@
+[debug] [2024-06-25T07:01:10.915Z] ----------------------------------------------------------------------
+[debug] [2024-06-25T07:01:10.918Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js projects:list
+[debug] [2024-06-25T07:01:10.918Z] CLI Version:   13.11.4
+[debug] [2024-06-25T07:01:10.918Z] Platform:      win32
+[debug] [2024-06-25T07:01:10.918Z] Node Version:  v20.13.0
+[debug] [2024-06-25T07:01:10.918Z] Time:          Tue Jun 25 2024 12:31:10 GMT+0530 (India Standard Time)
+[debug] [2024-06-25T07:01:10.918Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-06-25T07:01:10.921Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2024-06-25T07:01:11.058Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-06-25T07:01:11.059Z] > authorizing via signed-in user (thulasi3135@gmail.com)
+[debug] [2024-06-25T07:01:11.063Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2024-06-25T07:01:11.291Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects?pageSize=1000, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects?pageSize=1000 failed, reason: self-signed certificate in certificate chain
+[debug] [2024-06-25T07:01:11.292Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects?pageSize=1000
+[debug] [2024-06-25T07:01:11.393Z] *** [apiv2] error from fetch(https://firebase-public.firebaseio.com/cli.json, {"headers":{},"method":"GET"}): FetchError: request to https://firebase-public.firebaseio.com/cli.json failed, reason: self-signed certificate in certificate chain
+[warn] !  Unable to fetch the CLI MOTD and remote config. This is not a fatal error, but may indicate an issue with your network connection. 
+[debug] [2024-06-25T07:01:11.395Z] Failed to fetch MOTD FirebaseError: Failed to make request to https://firebase-public.firebaseio.com/cli.json
+[debug] [2024-06-25T07:01:11.424Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects?pageSize=1000
+    at RetryOperation._fn (C:\Program Files\nodejs\node_modules\firebase-tools\lib\apiv2.js:259:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to list Firebase projects. See firebase-debug.log for more info.
