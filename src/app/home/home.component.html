@@ -1,12 +1,12 @@
-
-  <!-- The Tour Section -->
+@if(isLoading){<mat-spinner></mat-spinner>}
+@else {
   <div class="w3-black" id="tour">
     <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
       <h2 class="w3-wide w3-center">TODO</h2>
       <p class="w3-opacity w3-center"><i>Here,s Your todos</i></p><br>
 
 
-      <table mat-table [dataSource]="todos" class="mat-elevation-z8">
+      <table mat-table [dataSource]="todo" class="mat-elevation-z8">
 
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
@@ -21,6 +21,7 @@
             <mat-checkbox (click)="$event.stopPropagation()"
                           (change)="$event ? selection.toggle(row) : null"
                           [aria-label]="checkboxLabel(row)"
+                          [checked]="row.completed"
                           [disabled]="row.completed">
             </mat-checkbox>
           </td>
@@ -60,4 +61,4 @@
         </tr>
       </table>
     </div>
-  </div>
+  </div>}

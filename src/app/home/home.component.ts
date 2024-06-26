@@ -5,36 +5,35 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Todos } from '../model/todo.interface';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ApiService } from '../services/api.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatIconModule,MatTableModule,CommonModule,MatCheckboxModule],
+  imports: [MatIconModule,MatTableModule,CommonModule,MatCheckboxModule,MatProgressSpinnerModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   displayedColumns: string[] = ['select', 'id', 'Todo', 'Edit','Delete'];
-  dataSource: MatTableDataSource<any>;
-  selection = new SelectionModel<any>(true, []);
-  todos: any[]=[];
-
-  constructor(private http:HttpClient){
-    this.dataSource = new MatTableDataSource<any>(this.todos);
+  dataSource: MatTableDataSource<Todos>;
+  selection = new SelectionModel<Todos>(true, []);
+  todo: Todos[]=[];
+  isLoading:boolean=true;
+  constructor(public api:ApiService){
+    this.dataSource = new MatTableDataSource<Todos>(this.todo);
   }
     ngOnInit(): void {
 
-        this.http.get('https://dummyjson.com/todos').subscribe((todos:any)=>{
-          this.todos=todos.todos;
-          console.log(this.todos);
+        this.api.getTodos().subscribe((data:any)=>{
+          this.todo=data.todos;
+          this.isLoading=false;
+          console.log(this.todo);
         })
 
   }
@@ -57,10 +56,10 @@ export class HomeComponent {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
+  checkboxLabel(row?: Todos): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
 }
